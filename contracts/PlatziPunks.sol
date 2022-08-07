@@ -5,11 +5,13 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "./Base64.sol";
 import "./PlatziPunksDNA.sol";
 
 contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
     using Counters for Counters.Counter;
+    using Strings for uint256;
     Counters.Counter private _idCounter;
     uint256 public maxSupply;
     string URI;
@@ -22,7 +24,7 @@ contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
 
     function mint() public{
         uint256 tokenId=_idCounter.current();
-        require(tokenId<maxSupply, 'Not PlatziPunks available');
+        require(tokenId<maxSupply, 'Not PlatziPunks available :(');
 
         tokenDNA[tokenId]=deterministicPseudoRandomDNA(tokenId, msg.sender);
         _safeMint(msg.sender, tokenId);
@@ -86,14 +88,14 @@ contract PlatziPunks is ERC721, ERC721Enumerable, PlatziPunksDNA{
 
         string memory jsonURI=Base64.encode(
             abi.encodePacked(
-                '{ "name": "PlatziPunks #',
-                tokenId,
+                '{"name": "PlatziPunks #',
+                tokenId.toHexString(),
                 '", "description": "Platzi Punks are randomized Avataaars stored on chain to teach DApp development on Platzi", "image":"',
                 image,
                 '"}'
         ));
 
-        return string(abi.encodePacked('data:application/json; base64,', jsonURI));
+        return string(abi.encodePacked('data:application/json;base64,', jsonURI));
     }
 
     //Override required
