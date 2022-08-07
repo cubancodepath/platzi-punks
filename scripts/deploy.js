@@ -6,7 +6,7 @@ const deploy=async ()=>{
     console.log("Account balance:",(await deployer.getBalance()).toString()); //get account balance and print
    
     const Token=await ethers.getContractFactory("PlatziPunks"); // get the contract
-    const token=await Token.deploy(1000, 'https//avatasars.io'); //deploy the contract
+    const token=await Token.deploy(10000, 'https://avataaars.io/'); //deploy the contract
     
     console.log("Token address:",token.address); //print the contract address
 }
