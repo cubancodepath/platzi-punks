@@ -1,6 +1,6 @@
 # PlatziPunks
 
-This project is a smarts contract groups to create a Not Fungible Tokens (NFT) collection. Using the [Avataars.io API](https://avataars.io).
+This project is a smarts contract groups to create a Not Fungible Tokens (NFT) collection. Using the [Avataars.io](https://avataars.io) API.
 
 ## Table of contents
   - [Demo](#demo)
